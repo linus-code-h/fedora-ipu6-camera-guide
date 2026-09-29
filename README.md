@@ -92,7 +92,7 @@ wireplumber.service: Failed with result 'core-dump'.
 
 PipeWire also logged repeated `VIDIOC_S_FMT` failures with errno 16 (`Device or resource busy`) for the virtual MIPI camera. libcamera used `uncalibrated.yaml` because an OV02C10-specific tuning file was unavailable.
 
-These observations identify problems in the capture stack, but do not prove that each error was caused by Firefox. Concurrent camera access and the selected capture source were not isolated.
+The owner later identified the test site as https://de.webcamtests.com/ and confirmed that Zoom and the site were briefly open simultaneously; only one could access the camera at a time. This makes contention a plausible explanation for the busy-device messages. The owner now reports normal operation. The flicker and libcamera crash were not isolated to a specific application, capture source or concurrent-access sequence.
 
 ### Firefox workaround
 

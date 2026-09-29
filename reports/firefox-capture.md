@@ -34,7 +34,9 @@ After restarting, libcamera logged that `ov02c10.yaml` was missing and that it w
 
 At 09:57, PipeWire repeatedly failed `VIDIOC_S_FMT` for the virtual MIPI device with errno 16 (`Device or resource busy`) and failed format negotiation. Negotiation described NV12, 1280×720, 30/1 fps.
 
-These messages are correlated with the investigation, not proof that Firefox directly caused the libcamera crash. The precise website, originally selected source and whether another application was capturing concurrently have not been confirmed.
+The test site was https://de.webcamtests.com/ . In a follow-up, the owner confirmed that Zoom and the website were briefly open at the same time and that camera access worked in only one of them at a time. The owner now reports normal operation.
+
+This makes capture contention a plausible explanation for the EBUSY messages; those messages alone are not evidence of a Firefox defect. It does not establish that concurrent access caused the flicker or the libcamera crash. The exact capture source and timing relative to each logged error remain unconfirmed.
 
 ## Workaround and result
 
@@ -52,7 +54,7 @@ The browser's effective runtime preference was not independently read. A later o
 
 The selected camera should deliver a stable preview. Switching or stopping capture should not crash the session manager. Busy devices should produce a clear error and recover when released.
 
-For further investigation, confirm the affected website and selected node, read the effective preference, test one capture client at a time, and correlate Firefox/PipeWire/libcamera logs while switching backends. This has not been done yet, and the working machine has not been deliberately regressed to collect it.
+For further investigation, confirm the selected node, read the effective preference, test one capture client at a time on the named site, and correlate Firefox/PipeWire/libcamera logs while switching backends. This has not been done yet, and the working machine has not been deliberately regressed to collect it. A new Firefox-specific defect should not be asserted from the busy-device messages without this isolation.
 
 Related context, not established duplicates:
 

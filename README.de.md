@@ -28,6 +28,8 @@ Danach funktionierten Kamera-App und Zoom mit **Intel MIPI Camera**. Eine dauerh
 
 In den Protokollen gab es einen libcamera-Absturz und PipeWire-Formatkonflikte. Für Firefox wurde folgender Workaround eingerichtet:
 
+Die Testseite war https://de.webcamtests.com/ . Der Benutzer bestätigte nachträglich, dass Zoom und die Webseite kurz gleichzeitig geöffnet waren und dabei nur eine Anwendung auf die Kamera zugreifen konnte. Das passt zu den Meldungen „Gerät belegt“; diese allein belegen keinen Firefox-Fehler. Ob auch das Flackern und der Absturz damit zusammenhingen, ist nicht nachgewiesen.
+
 1. Andere Kameravorschauen schließen.
 2. In Firefox `about:config` öffnen.
 3. **`media.webrtc.camera.allow-pipewire`** auf **`false`** setzen.
